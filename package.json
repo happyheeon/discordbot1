@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "디코 봇 만들기",
   "main": "index.js",
+  "type": "module",
   "dependencies": {
     "discord.js": "^14.17.3",
     "dotenv": "^16.0.3"
