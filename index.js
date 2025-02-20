@@ -86,9 +86,9 @@ client.on(Events.InteractionCreate, async (interaction) => {
 
 // 프리픽스 커맨드 수신
 client.on(Events.MessageCreate, async (message) => {
-  if (!message.content.startsWith("!") || message.author.bot) return; // 프리픽스 확인 및 봇 메시지 무시
+  if (!message.content.startsWith("<@1340935110886953020>") || message.author.bot) return; // 프리픽스 확인 및 봇 메시지 무시
 
-  const args = message.content.slice(1).trim().split(/ +/); // 프리픽스 제거 및 인자 분리
+  const args = message.content.slice(22).trim().split(/ +/); // 프리픽스 제거 및 인자 분리
   const commandName = args.shift().toLowerCase(); // 커맨드 이름 추출
 
   const command = client.commands.get(commandName); // 커맨드 찾기
