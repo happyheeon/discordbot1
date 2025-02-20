@@ -101,3 +101,19 @@ client.on(Events.MessageCreate, async (message) => {
     await message.reply("명령어 실행 중 오류가 발생했습니다."); // 오류 메시지 전송
   }
 });
+client.on(Events.MessageCreate, async (message) => {
+  if (!message.content.startsWith("~!") || message.author.bot) return; // 프리픽스 확인 및 봇 메시지 무시
+
+  const args = message.content.slice(2).trim().split(/ +/); // 프리픽스 제거 및 인자 분리
+  const commandName = args.shift().toLowerCase(); // 커맨드 이름 추출
+
+  const command = client.commands.get(commandName); // 커맨드 찾기
+  if (!command) return; // 커맨드가 없으면 종료
+
+  try {
+    await command.execute(message, args); // 커맨드 실행
+  } catch (error) {
+    console.error(error);
+    await message.reply("명령어 실행 중 오류가 발생했습니다."); // 오류 메시지 전송
+  }
+});
