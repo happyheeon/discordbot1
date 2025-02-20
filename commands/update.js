@@ -8,6 +8,6 @@ module.exports = {
         ),
   async execute(interaction) {
     
-    client.channels.cache.get(1341367065667436616).send(interaction.options.getString('message') + `\n@`)
+    client.channels.cache.get(1341367065667436616).send(interaction.options.getString('message') + `\n<@1341678302712168528>`)
   },
 };
