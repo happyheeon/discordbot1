@@ -3,9 +3,19 @@ const {
   ActionRowBuilder,
   StringSelectMenuBuilder,
   EmbedBuilder,
+  SlashCommandBuilder,
 } = require("discord.js");
 
 module.exports = (client) => {
+  // 슬래시 커맨드 등록
+  client.on("ready", () => {
+    const commandData = new SlashCommandBuilder()
+      .setName("경고기능")
+      .setDescription("유저에게 경고를 주거나 밴할 수 있는 기능입니다.");
+
+    client.application.commands.create(commandData);
+  });
+
   const warnButton = new ButtonBuilder()
     .setCustomId("warnButton")
     .setLabel("경고하기")
@@ -35,7 +45,12 @@ module.exports = (client) => {
   const row = new ActionRowBuilder().addComponents(warnButton, banButton);
 
   client.on("interactionCreate", async (interaction) => {
-    if (interaction.isButton() && interaction.customId === "warnButton") {
+    if (interaction.isCommand() && interaction.commandName === "경고기능") {
+      await interaction.reply({ embeds: [warnEmbed], components: [row] });
+    } else if (
+      interaction.isButton() &&
+      interaction.customId === "warnButton"
+    ) {
       const userOptions = getUserOptions(interaction.guild);
 
       const selectMenu = new StringSelectMenuBuilder()
